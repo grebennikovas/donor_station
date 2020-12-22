@@ -8,7 +8,7 @@ public interface CardService {
 
     Card addCard(Card card);
     void delete(long id);
-    //Card getByName(String f_name, String l_name);
+    List<Card>  getByRh(int rh);
     List<Card> getById(long id);
     Card editCard(Card card);
     List<Card> getAll();

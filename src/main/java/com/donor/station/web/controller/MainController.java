@@ -36,10 +36,28 @@ public class MainController {
         }
     }
 
+    @GetMapping( "card")
+    public ResponseEntity<Response<List<Card>>> getAll() {
+        try {
+            return new ResponseEntity<>(new Response<>(new Meta(0, "All good"), cards.getAll()), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new Response<>(new Meta(1, e.toString()), null), HttpStatus.CONFLICT);
+        }
+    }
+
     @GetMapping( "card/{id}")
     public ResponseEntity<Response<List<Card>>> getCardById(@PathVariable Long id) {
         try {
-            return new ResponseEntity<>(new Response<>(new Meta(0, "All good"), cards.getAll()), HttpStatus.OK);
+            return new ResponseEntity<>(new Response<>(new Meta(0, "All good"), cards.getById(id)), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new Response<>(new Meta(1, e.toString()), null), HttpStatus.CONFLICT);
+        }
+    }
+
+    @GetMapping( "rh/{rh}")
+    public ResponseEntity<Response<List<Card>>> getCardByName(@PathVariable int rh) {
+        try {
+            return new ResponseEntity<>(new Response<>(new Meta(0, "All good"), cards.getByRh(rh)), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new Response<>(new Meta(1, e.toString()), null), HttpStatus.CONFLICT);
         }

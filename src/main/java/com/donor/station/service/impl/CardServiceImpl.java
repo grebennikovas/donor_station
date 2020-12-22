@@ -26,10 +26,10 @@ public class CardServiceImpl implements CardService {
         cardRepository.deleteById(id);
     }
 
-    /*@Override
-    public Card getByName(String f_name,String l_name) {
-        return cardRepository.findByName(f_name, l_name);
-    }*/
+    @Override
+    public List<Card>  getByRh(int rh) {
+        return cardRepository.getByRh(rh);
+    }
 
     @Override
     public List<Card> getById(long id) {

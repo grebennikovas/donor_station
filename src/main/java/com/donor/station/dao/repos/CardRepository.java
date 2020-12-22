@@ -1,12 +1,16 @@
 package com.donor.station.dao.repos;
 
 import com.donor.station.dao.entities.Card;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface CardRepository extends JpaRepository<Card, Long> {
 
-    /*@Query("select b from Card b where Card.f_name = :f_name and Card.l_name=:l_name")
-    Card findByName(@Param("f_name") String f_name, @Param("l_name") String name);*/
+    @Query("select f from Card f where f.rh_id=:rh")
+    List<Card> getByRh(@Param("rh") int rh);
 }
