@@ -9,12 +9,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Request {
-
-    public Request(){
-
-    }
-
-    public int id;
-    public String value;
+public class BloodTypeDto {
+    public String blood;
 }

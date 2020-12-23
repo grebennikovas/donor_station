@@ -4,10 +4,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 
 @Entity
@@ -17,7 +15,7 @@ import java.sql.Date;
 /*@Setter
 @AllArgsConstructor*/
 @NoArgsConstructor
-public class Card {
+public class Card implements Serializable {
 
     @Id
     @Column(name="id",length = 16,nullable = false)

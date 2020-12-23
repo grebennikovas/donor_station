@@ -1,4 +1,4 @@
-package com.donor.station.web.dto;
+package com.donor.station.web.dto.basic;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Meta {
-    private int code;
-    private String desc;
+public class Response<T> {
+
+    private Meta meta;
+    private T data;
 }

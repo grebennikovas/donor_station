@@ -1,11 +1,13 @@
 package com.donor.station.web.controller;
 
+import com.donor.station.dao.entities.Blood_type;
 import com.donor.station.dao.entities.Card;
 import com.donor.station.service.OneService;
+import com.donor.station.service.interfaces.BloodTypeService;
 import com.donor.station.service.interfaces.CardService;
-import com.donor.station.web.dto.Meta;
-import com.donor.station.web.dto.Request;
-import com.donor.station.web.dto.Response;
+import com.donor.station.web.dto.basic.Meta;
+import com.donor.station.web.dto.basic.Request;
+import com.donor.station.web.dto.basic.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,9 @@ public class MainController {
 
     @Autowired
     CardService cards;
+
+    @Autowired
+    BloodTypeService bloodTypes;
 
     @GetMapping( "get/{id}")
     public ResponseEntity<Response<Request>> getMethod(@PathVariable Long id) {
@@ -58,6 +63,15 @@ public class MainController {
     public ResponseEntity<Response<List<Card>>> getCardByName(@PathVariable int rh) {
         try {
             return new ResponseEntity<>(new Response<>(new Meta(0, "All good"), cards.getByRh(rh)), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new Response<>(new Meta(1, e.toString()), null), HttpStatus.CONFLICT);
+        }
+    }
+
+    @GetMapping( "blood_type")
+    public ResponseEntity<Response<List<Blood_type>>> getCardByName() {
+        try {
+            return new ResponseEntity<>(new Response<>(new Meta(0, "All good"), bloodTypes.getAll()), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new Response<>(new Meta(1, e.toString()), null), HttpStatus.CONFLICT);
         }

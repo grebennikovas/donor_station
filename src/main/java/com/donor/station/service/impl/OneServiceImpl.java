@@ -1,7 +1,7 @@
 package com.donor.station.service.impl;
 
 import com.donor.station.service.OneService;
-import com.donor.station.web.dto.Request;
+import com.donor.station.web.dto.basic.Request;
 import org.springframework.stereotype.Service;
 
 @Service
