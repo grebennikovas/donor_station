@@ -11,6 +11,9 @@ import java.util.List;
 @Repository
 public interface CardRepository extends JpaRepository<Card, Long> {
 
-    @Query("select f from Card f where f.rh_id=:rh")
-    List<Card> getByRh(@Param("rh") int rh);
+    @Query("select c from Card c where c.rh_type.id=:rh")
+    List<Card> RhFilter(@Param("rh") Long rh);
+
+    @Query("select c from Card c where c.blood_type.id=:blood")
+    List<Card> BloodFilter(@Param("blood") Long blood);
 }

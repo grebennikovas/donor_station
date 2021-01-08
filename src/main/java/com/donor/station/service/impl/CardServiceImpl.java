@@ -27,12 +27,16 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public List<Card>  getByRh(int rh) {
-        return cardRepository.getByRh(rh);
+    public List<Card> getByRh(Long rh) {
+        return cardRepository.RhFilter(rh);
+    }
+
+    public List<Card> getByBlood(Long blood) {
+        return cardRepository.BloodFilter(blood);
     }
 
     @Override
-    public List<Card> getById(long id) {
+    public List<Card> getById(Long id) {
         return cardRepository.findAllById(Collections.singleton(id));
     }
 

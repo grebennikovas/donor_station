@@ -24,19 +24,4 @@ public class BloodTypeServiceImpl implements BloodTypeService {
         return bloodTypeRepository.findAllById(Collections.singleton(id));
     }
 
-    @Override
-    public Blood_type editBloodType(Blood_type bt) {
-        return bloodTypeRepository.saveAndFlush(bt);
-    }
-
-    @Override
-    public Blood_type addBloodType(Blood_type bt) {
-        Blood_type new_bt = bloodTypeRepository.saveAndFlush(bt);
-        return new_bt;
-    }
-
-    @Override
-    public void deleteBlodType(long id) {
-        bloodTypeRepository.deleteById(id);
-    }
 }

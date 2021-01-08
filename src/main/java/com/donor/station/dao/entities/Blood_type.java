@@ -1,23 +1,21 @@
 package com.donor.station.dao.entities;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name= "blood_type", schema = "donor_station")
 @Data
 @Getter
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
 public class Blood_type {
     @Id
     @Column(name="id",nullable = false)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name="blood_name", nullable = false)
     private String blood_name;

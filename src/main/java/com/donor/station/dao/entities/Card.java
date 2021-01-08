@@ -1,40 +1,38 @@
 package com.donor.station.dao.entities;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Date;
 
 @Entity
 @Table(name= "card", schema = "donor_station")
 @Data
 @Getter
-/*@Setter
-@AllArgsConstructor*/
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
-public class Card implements Serializable {
-
+public class Card {
     @Id
     @Column(name="id",length = 16,nullable = false)
-    long id;
-    @Column(name="f_name")
-    String f_name;
-    @Column(name="l_name")
-    String l_name;
-    @Column(name="p_name")
-    String p_name;
-    @Column(name="birthday")
-    Date birthday;
-    @Column(name="pas_series")
-    int pas_series;
-    @Column(name="pas_number")
-    int pas_number;
-    @Column(name="rh_id")
-    int rh_id;
-    @Column(name="blood_id")
-    int blood_id;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name="f_name", nullable = false)
+    private String f_name;
+    @Column(name="l_name", nullable = false)
+    private String l_name;
+    @Column(name="p_name", nullable = true)
+    private String p_name;
+    @Column(name="birthday", nullable = false)
+    private Date birthday;
+    @Column(name="pas_series", nullable = false)
+    private int pas_series;
+    @Column(name="pas_number", nullable = false)
+    private int pas_number;
+    @ManyToOne(cascade = CascadeType.ALL, optional=false, fetch = FetchType.EAGER)
+    @JoinColumn(name = "blood_id", nullable = false)
+    private Blood_type blood_type;
+    @ManyToOne(cascade = CascadeType.ALL, optional=false, fetch = FetchType.EAGER)
+    @JoinColumn(name = "rh_id", nullable = false)
+    private Rh_type rh_type;
 }

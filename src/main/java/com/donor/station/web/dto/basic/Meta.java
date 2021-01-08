@@ -12,4 +12,6 @@ import lombok.Setter;
 public class Meta {
     private int code;
     private String desc;
+    /*private String request_time;
+    private String response_time;*/
 }

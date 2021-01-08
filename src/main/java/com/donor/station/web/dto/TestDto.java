@@ -5,11 +5,14 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Timestamp;
+
 @Data
 @AllArgsConstructor
 @Getter
 @Setter
-public class BloodTypeDto {
-    public Long blood_id;
-    public String blood_title;
+public class TestDto {
+    Long id;
+    Timestamp test_time;
+    CardDto card;
 }

@@ -9,7 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class BloodTypeDto {
-    public Long blood_id;
-    public String blood_title;
+public class DonationTypeDto {
+    Long donation_id;
+    String donation_title;
 }

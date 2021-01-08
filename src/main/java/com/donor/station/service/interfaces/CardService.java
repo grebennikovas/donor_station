@@ -8,8 +8,9 @@ public interface CardService {
 
     Card addCard(Card card);
     void delete(long id);
-    List<Card>  getByRh(int rh);
-    List<Card> getById(long id);
+    List<Card>  getByRh(Long rh);
+    public List<Card> getByBlood(Long blood);
+    List<Card> getById(Long id);
     Card editCard(Card card);
     List<Card> getAll();
 
