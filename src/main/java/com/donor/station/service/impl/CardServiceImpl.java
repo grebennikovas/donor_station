@@ -6,7 +6,6 @@ import com.donor.station.service.interfaces.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -36,8 +35,8 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public List<Card> getById(Long id) {
-        return cardRepository.findAllById(Collections.singleton(id));
+    public Card getById(Long id) {
+        return cardRepository.getOne(id);
     }
 
     @Override

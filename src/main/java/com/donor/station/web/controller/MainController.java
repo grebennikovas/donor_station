@@ -1,21 +1,23 @@
 package com.donor.station.web.controller;
 
-import com.donor.station.dao.entities.Card;
-import com.donor.station.dao.entities.Donation;
-import com.donor.station.dao.entities.Result;
-import com.donor.station.dao.entities.Test;
-import com.donor.station.mapper.CardMapper;
+import com.donor.station.mapper.DonorMapper;
 import com.donor.station.service.interfaces.CardService;
 import com.donor.station.service.interfaces.DonationService;
 import com.donor.station.service.interfaces.ResultService;
 import com.donor.station.service.interfaces.TestService;
 import com.donor.station.web.dto.CardDto;
+import com.donor.station.web.dto.DonationDto;
+import com.donor.station.web.dto.ResultDto;
+import com.donor.station.web.dto.TestDto;
 import com.donor.station.web.dto.basic.Meta;
 import com.donor.station.web.dto.basic.Response;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -33,67 +35,69 @@ public class MainController {
     @Autowired
     DonationService donations;
 
+    @ApiOperation(
+            value = "Мед-карты",
+            notes = "Позволяет получить список всех карт донации"
+    )
     @RequestMapping( value="/card", method = RequestMethod.GET)
-    public ResponseEntity<Response<List<Card>>> getCards() {
+    public ResponseEntity<Response<List<CardDto>>> getCards() {
+        try {
+            List<CardDto> list = DonorMapper.INSTANCE.CardListToDto(cards.getAll());
+            return new ResponseEntity<>(new Response<>(new Meta(0, "All good"), list), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new Response<>(new Meta(1, e.toString()), null), HttpStatus.CONFLICT);
+        }
+    }
+
+    @ApiOperation(
+            value = "Тесты",
+            notes = "Позволяет получить список всех тестов перед процедурой донации"
+    )
+    @RequestMapping( value="/test", method = RequestMethod.GET)
+    public ResponseEntity<Response<List<TestDto>>> getTests() {
+        try {
+            List<TestDto> list = DonorMapper.INSTANCE.TestListToDto(tests.getAll());
+            return new ResponseEntity<>(new Response<>(new Meta(0, "All good"), list), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new Response<>(new Meta(1, e.toString()), null), HttpStatus.CONFLICT);
+        }
+    }
+
+    @ApiOperation(
+            value = "Результаты тестирования",
+            notes = "Позволяет получить список всех результатов тестирования перед роцедурой донации"
+    )
+    @RequestMapping( value="/result", method = RequestMethod.GET)
+    public ResponseEntity<Response<List<ResultDto>>> getResults() {
+        try {
+            List<ResultDto> list = DonorMapper.INSTANCE.ResultListToDto(results.getAll());
+            return new ResponseEntity<>(new Response<>(new Meta(0, "All good"), list), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new Response<>(new Meta(1, e.toString()), null), HttpStatus.CONFLICT);
+        }
+    }
+
+    @ApiOperation(
+            value = "Донации",
+            notes = "Позволяет получить список всех донаций"
+    )
+    @RequestMapping( value="/donation", method = RequestMethod.GET)
+    public ResponseEntity<Response<List<DonationDto>>> getDonations() {
+        try {
+            List<DonationDto> list = DonorMapper.INSTANCE.DonationListToDto(donations.getAll());
+            return new ResponseEntity<>(new Response<>(new Meta(0, "All good"), list), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new Response<>(new Meta(1, e.toString()), null), HttpStatus.CONFLICT);
+        }
+    }
+    /* Получение DAO Card */
+    /*@RequestMapping( value="/card_dao", method = RequestMethod.GET)
+    public ResponseEntity<Response<List<Card>>> getCardsDAO() {
         try {
             List<Card> list = cards.getAll();
-            //List<CardDto> list = CardMapper.INSTANCE.CardListToDto(cards.getAll());
             return new ResponseEntity<>(new Response<>(new Meta(0, "All good"), list), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new Response<>(new Meta(1, e.toString()), null), HttpStatus.CONFLICT);
         }
-    }
-    @RequestMapping( value="/test", method = RequestMethod.GET)
-    public ResponseEntity<Response<List<Test>>> getTests() {
-        try {
-            List<Test> list = tests.getAll();
-            //List<CardDto> list = CardMapper.INSTANCE.CardListToDto(cards.getAll());
-            return new ResponseEntity<>(new Response<>(new Meta(0, "All good"), list), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(new Response<>(new Meta(1, e.toString()), null), HttpStatus.CONFLICT);
-        }
-    }
-    @RequestMapping( value="/result", method = RequestMethod.GET)
-    public ResponseEntity<Response<List<Result>>> getResults() {
-        try {
-            List<Result> list = results.getAll();
-            //List<CardDto> list = CardMapper.INSTANCE.CardListToDto(cards.getAll());
-            return new ResponseEntity<>(new Response<>(new Meta(0, "All good"), list), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(new Response<>(new Meta(1, e.toString()), null), HttpStatus.CONFLICT);
-        }
-    }
-    @RequestMapping( value="/donation", method = RequestMethod.GET)
-    public ResponseEntity<Response<List<Donation>>> getDonations() {
-        try {
-            List<Donation> list = donations.getAll();
-            //List<CardDto> list = CardMapper.INSTANCE.CardListToDto(cards.getAll());
-            return new ResponseEntity<>(new Response<>(new Meta(0, "All good"), list), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(new Response<>(new Meta(1, e.toString()), null), HttpStatus.CONFLICT);
-        }
-    }
-
-    @RequestMapping( value="/card/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Response<List<CardDto>>> getCardById(@PathVariable Long id) {
-        List<CardDto> list = CardMapper.INSTANCE.CardListToDto(cards.getById(id));
-        try {
-            return new ResponseEntity<>(new Response<>(new Meta(0, "All good"), list), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(new Response<>(new Meta(1, e.toString()), null), HttpStatus.CONFLICT);
-        }
-    }
-    // нужно доделать
-    @RequestMapping( value= "/card/filter", method = RequestMethod.GET)
-    public ResponseEntity<Response<List<CardDto>>> getCardByName(@RequestParam Long rh, @RequestParam Long blood) {
-
-        List<CardDto> list = CardMapper.INSTANCE.CardListToDto(cards.getByRh(rh));
-        try {
-            return new ResponseEntity<>(new Response<>(new Meta(0, "All good"), list), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(new Response<>(new Meta(1, e.toString()), null), HttpStatus.CONFLICT);
-        }
-    }
-
-
+    }*/
 }

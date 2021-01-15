@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -13,6 +13,6 @@ import java.sql.Timestamp;
 @Setter
 public class TestDto {
     Long id;
-    Timestamp test_time;
+    LocalDateTime test_time;
     CardDto card;
 }
