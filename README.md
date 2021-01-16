@@ -16,4 +16,4 @@ ____
 
 ![Alt-текст](https://github.com/grebennikovas/donor/blob/master/swagger.jpg?raw=true "Swagger")
 
-Скоро их будет еще больше...
+Со временем проект будет дорабатываться и усложняться.
