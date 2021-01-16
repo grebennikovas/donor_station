@@ -6,9 +6,9 @@
 - Java Spring
 ____
 
-### Схема данных в [PonyORM](https://editor.ponyorm.com/)
+### Схема данных 
 
-![Alt-текст](https://github.com/grebennikovas/donor/blob/master/schema.jpg?raw=true "Схема данных в PonyORM")
+![Alt-текст](https://github.com/grebennikovas/donor/blob/master/ERD.jpg?raw=true "Схема данных")
 ____
 
 ### Методы из Swagger
