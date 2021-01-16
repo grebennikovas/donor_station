@@ -1,14 +1,13 @@
 ## Учебное проект для работы с базой данных станции донации крови
 
-
 Технологии:
 - PostgreSQL
 - Java Spring
 ____
 
-### Схема данных 
-
+### Схема данных
 ![Alt-текст](https://github.com/grebennikovas/donor/blob/master/ERD.jpg?raw=true "Схема данных")
+
 ____
 
 ### Методы из Swagger
