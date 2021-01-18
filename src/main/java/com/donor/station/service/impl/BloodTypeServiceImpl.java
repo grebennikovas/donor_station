@@ -20,8 +20,8 @@ public class BloodTypeServiceImpl implements BloodTypeService {
     }
 
     @Override
-    public List<Blood_type> getById(long id) {
-        return bloodTypeRepository.findAllById(Collections.singleton(id));
+    public Blood_type getById(long id) {
+        return bloodTypeRepository.getOne(id);
     }
 
 }

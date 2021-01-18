@@ -20,7 +20,13 @@ public interface DonorMapper {
             @Mapping(source = "cardDao.rh_type", target = "rh")
     })
     CardDto CardToDto(Card cardDao);
+    @Mappings({
+            @Mapping(source = "blood", target = "blood_type"),
+            @Mapping(source = "rh", target = "rh_type")
+    })
+    Card CardToDao(CardDto cardDto);
     List<CardDto> CardListToDto(List<Card> list);
+    List<Card> CardListToDao(List<CardDto> list);
 
     // Blood
     @Mappings({
@@ -28,6 +34,11 @@ public interface DonorMapper {
             @Mapping(source = "id", target = "blood_id"),
     })
     BloodTypeDto BloodToDto(Blood_type blood_type);
+    @Mappings({
+            @Mapping(source = "blood_title", target = "blood_name"),
+            @Mapping(source = "blood_id", target = "id"),
+    })
+    Blood_type BloodToDao(BloodTypeDto blood_type);
 
     // Rh
     @Mappings({
@@ -35,6 +46,11 @@ public interface DonorMapper {
             @Mapping(source = "id", target = "rh_id")
     })
     RhTypeDto RhToDto(Rh_type entity);
+    @Mappings({
+            @Mapping(source = "rh_title", target = "rh_name"),
+            @Mapping(source = "rh_id", target = "id")
+    })
+    Rh_type RhToDao(RhTypeDto rhTypeDto);
 
     // Test
     TestDto TestToDto(Test entity);

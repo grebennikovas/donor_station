@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface BloodTypeService {
     List<Blood_type> getAll();
-    List<Blood_type> getById(long id);
+    Blood_type getById(long id);
 }

@@ -1,6 +1,6 @@
 package com.donor.station.dao.entities;
 
-import lombok.*;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -8,10 +8,15 @@ import java.sql.Date;
 @Entity
 @Table(name= "card", schema = "donor_station")
 @Data
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@NamedEntityGraphs({
+            @NamedEntityGraph(
+                name = "Card.default",
+                attributeNodes = {
+                    @NamedAttributeNode(value = "blood_type"),
+                    @NamedAttributeNode(value = "rh_type")
+                }
+        )
+})
 public class Card {
     @Id
     @Column(name="id",length = 16,nullable = false)
@@ -29,10 +34,11 @@ public class Card {
     private int pas_series;
     @Column(name="pas_number", nullable = false)
     private int pas_number;
-    @ManyToOne(cascade = CascadeType.ALL, optional=false, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, optional=false)
     @JoinColumn(name = "blood_id", nullable = false)
     private Blood_type blood_type;
-    @ManyToOne(cascade = CascadeType.ALL, optional=false, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, optional=false)
     @JoinColumn(name = "rh_id", nullable = false)
     private Rh_type rh_type;
+
 }
